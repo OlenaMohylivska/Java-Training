@@ -1,13 +1,10 @@
 package com.company;
 
+import java.io.IOException;
+
 public class Main {
 
-    public static void main(String[] args) {
-
-        int num1 = 11;
-        int num2 = 4;
-        int result = num1 + num2;
-
-        System.out.println("Result: " + result);
+    public static void main(String[] args) throws IOException {
+        ATMFacade.atmFacade();
     }
 }
