@@ -11,16 +11,17 @@ public class ATMFacade {
         System.out.println("1. to take money");
         System.out.println("2. to put money");
         System.out.println("3. to show the number of banknotes at the ATM");
-        System.out.println("4. to leave");
+        System.out.println("4. to show statistic");
+        System.out.println("5. to leave");
         String answer = start.nextLine();
 
         if (answer.equalsIgnoreCase("1")) {
             System.out.println("How much money do you want to get?");
             Scanner num = new Scanner(System.in);
             int amountOfMoney = num.nextInt();
-
-            if (Banknotes.atm.allMoneyInATM() < amountOfMoney) {
-                System.out.println("Ooops. ATM doesn't have this sum. You can get not more than " + Banknotes.atm.allMoneyInATM());
+            int sumOfAllMoneyInATM = Banknotes.atm.toCountAllMoneyInATM(Banknotes.amountOfMoneyInATM);
+            if (sumOfAllMoneyInATM < amountOfMoney) {
+                System.out.println("Ooops. ATM doesn't have this sum. You can get not more than " + sumOfAllMoneyInATM);
                 System.out.println("");
                 atmFacade();
             } else {
@@ -60,10 +61,21 @@ public class ATMFacade {
         } else if (answer.equalsIgnoreCase("3")) {
             Cache cache = new Cache();
             cache.banknotes();
-            System.out.println("Available sum: " + Banknotes.atm.allMoneyInATM());
+            System.out.println("Available sum: " + Banknotes.atm.toCountAllMoneyInATM(Banknotes.amountOfMoneyInATM));
             System.out.println("");
             atmFacade();
         } else if (answer.equalsIgnoreCase("4")) {
+            System.out.println("Statistic");
+            System.out.println("From the beginning of the work was TAKEN:");
+            for (int i = 0; i < 10; i++) {
+                System.out.println(Banknotes.nameOfBanknotes[i] + ": " + Statistic.statOfTakenMoney[i]);
+            }
+            System.out.println("From the beginning of the work was PLACED:");
+            for (int i = 0; i < 10; i++) {
+                System.out.println(Banknotes.nameOfBanknotes[i] + ": " + Statistic.statOfPlacedMoney[i]);
+            }
+            atmFacade();
+        } else if (answer.equalsIgnoreCase("5")) {
             System.out.println("Thank you for your visit!");
             start.close();
         } else {
